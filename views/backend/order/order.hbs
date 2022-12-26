@@ -1,0 +1,54 @@
+            <div class="container-fluid">
+                <!-- Card stats -->
+                <div class="card shadow border-0 mb-7">
+                   
+                    <div class="table-responsive">
+                        <table class="table ">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th class="font-12" style="color:#fff;" scope="col">STT</th>
+                        <th class="font-12" style="color:#fff;" scope="col">Bàn</th>
+                        <th class="font-12" style="color:#fff;" scope="col">Món ăn</th>
+                        <th class="font-12" style="color:#fff;" scope="col">Số lượng</th>
+                        <th class="font-12" style="color:#fff;" scope="col">Tổng tiền</th>
+                        <th class="font-12" style="color:#fff;" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                          {{#each order}}
+                        <tr>
+                        <th style="vertical-align: middle;" scope="row" rowspan={{foods.length}}>{{sum @index 1}}</th>
+                        <td style="vertical-align: middle;" rowspan={{foods.length}}>{{number_desk}}</td>
+                        <td style="vertical-align: middle;">{{foods.0.name}}</td>
+                        <td style="vertical-align: middle;">{{foods.0.number}}</td>
+                        <td style="vertical-align: middle;" rowspan={{foods.length}}>
+                                    {{convertMoney total}} 
+                                </td>
+                             <td style="border-bottom-width: 0px; vertical-align: middle;">  <a href="./order/{{_id}}" class="btn btn-primary btn-sm mr-2">Hoàn thành</a></td>
+
+                        </tr>
+                            {{#each foods}} 
+                            {{#if (ifCond @index '!=' 0)}}
+                                <tr>
+                                        <td>
+                                            {{name}}
+                                        </td>
+                                        <td>
+                                            {{number}}
+                                        </td>
+                                    </tr>
+                            {{/if}}
+                                    
+                             {{/each}}
+                        <tr>
+                             {{else}}
+                             <tr>
+                                <td colspan="6" style="font-weight: 600; text-align: center">Hết đơn hàng !!!</td>
+                             </tr>
+                         {{/each}}
+                    </tbody>
+                    </table>
+                        
+                    </div>
+                </div>
+            </div>

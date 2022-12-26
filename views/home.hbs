@@ -1,0 +1,233 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery library -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    ></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    ></script>
+    <link rel="stylesheet" href="./style/base.css" />
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/responsive.css" />
+    <title>Client</title>
+  </head>
+  <body>
+    <div class="root">
+      <header class="header">
+        <div class="wrapper_header">
+          <div class="logo">
+            <img src="./file/images.png" alt="" class="logo_img" />
+          </div>
+        </div>
+      </header>
+      <div class="body">
+        <h2 class="page">Chọn bàn</h2>
+        <section class="section">
+          <!-- Vi tri -->
+          <div class="position_group">
+            <div class="position_container">
+              <div class="position_item">
+
+                <img src="./file/desk.png" alt="" class="position_img" />
+                <p class="position_number">Bàn 1</p>
+              </div>
+            </div>
+            <div class="position_container">
+              <div class="position_item">
+
+                <img src="./file/desk.png" alt="" class="position_img" />
+                <p class="position_number">Bàn 2</p>
+              </div>
+            </div>
+            <div class="position_container">
+              <div class="position_item">
+
+                <img src="./file/desk.png" alt="" class="position_img" />
+                <p class="position_number">Bàn 3</p>
+              </div>
+            </div>
+            <div class="position_container">
+              <div class="position_item">
+
+                <img src="./file/desk.png" alt="" class="position_img" />
+                <p class="position_number">Bàn 4</p>
+              </div>
+            </div>
+            <div class="position_container">
+              <div class="position_item">
+
+                <img src="./file/desk.png" alt="" class="position_img" />
+                <p class="position_number">Bàn 5</p>
+              </div>
+            </div>
+            <div class="position_container">
+              <div class="position_item">
+
+                <img src="./file/desk.png" alt="" class="position_img" />
+                <p class="position_number">Bàn 6</p>
+              </div>
+            </div>
+          </div>
+          <!-- Do an -->
+          <div class="food_group hidden">
+            <ul class="food_list">
+              {{#each menu}}
+                <li class="food_item">
+                  <img src="/file/{{img_food}}" alt="" class="food_img" />
+                  <div class="food_infor">
+                    <div class="food_infor-head">
+                      <h4 class="food_name">{{name_food}}</h4>
+                      <p
+                        class="food_description"
+                        style="
+                                        height: 3em;
+                                        line-height: 20px;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 2; 
+                                                line-clamp: 2; 
+                                        -webkit-box-orient: vertical;"
+                      >{{description_food}}</p>
+                      <p class="food_price">Giá: {{convertMoney price_food}}</p>
+                    </div>
+                    <div class="food_action">
+                      <div class="number">
+                        <span class="minus">-</span>
+                        <input
+                          type="text"
+                          class="food_number"
+                          data-price="{{price_food}}"
+                          data-name="{{name_food}}"
+                          value="0"
+                        />
+                        <span class="plus">+</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </section>
+      </div>
+      <div class="action">
+        <div class="action_wrapper">
+          <button type="button" class="btn btn-default btn_back">Quay lại</button>
+          <button type="button" class="btn disabled btn_next">Tiếp tục</button>
+          <button
+            type="button"
+            class="btn btn-success hidden btn_model"
+            data-toggle="modal"
+            data-target="#myModal"
+          >Xác thực</button>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >&times;</button>
+            <h4 class="modal-title">Danh sách đặt món</h4>
+          </div>
+          <div class="modal-body">
+
+            <ul class="order-list">
+
+            </ul>
+            <div class="order_total">
+              <span>Tổng: </span>
+              <span class="price_total"> </span>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-success model_accept"
+              data-dismiss="modal"
+            >Xác thực</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script>
+      const position_container =
+      document.querySelectorAll('.position_container') const btn_next =
+      document.querySelector('.btn_next') const btn_back =
+      document.querySelector('.btn_back') const btn_model =
+      document.querySelector('.btn_model') const page =
+      document.querySelector('.page') const position_group =
+      document.querySelector('.position_group') const food_group =
+      document.querySelector('.food_group') const food_list =
+      document.querySelector('.food_list') const orderlist =
+      document.querySelector('.order-list') const model_accept =
+      document.querySelector('.model_accept') const price_total =
+      document.querySelector('.price_total') let orderCustomer = { desk: NaN,
+      food: [ ], total:NaN } position_container.forEach((item,index)=>{
+      item.addEventListener('click',()=>{ if(item.classList.contains('active')){
+      item.classList.remove('active') btn_next.classList.add('disabled')
+      btn_next.classList.remove('btn-success') orderCustomer = {
+      ...orderCustomer, desk: NaN } }else{ position_container.forEach(item=>{
+      item.classList.remove('active') }) item.classList.add('active')
+      btn_next.classList.remove('disabled')
+      btn_next.classList.add('btn-success') orderCustomer = { ...orderCustomer,
+      desk: index + 1 } } }) }) // Click btn next
+      btn_next.addEventListener('click',()=>{ page.innerText = 'Thực đơn'
+      position_group.classList.add('hidden')
+      food_group.classList.remove('hidden') btn_next.classList.add('hidden')
+      btn_model.classList.remove('hidden') })
+      btn_back.addEventListener('click',()=>{ page.innerText = 'Chọn bàn'
+      position_group.classList.remove('hidden')
+      food_group.classList.add('hidden') btn_next.classList.remove('hidden')
+      btn_model.classList.add('hidden') })
+      btn_model.addEventListener('click',()=>{ let total = 0 const food_number =
+      document.querySelectorAll('.food_number') let foodCustomer = []
+      food_number.forEach((food)=>{ if(food.value > 0){ foodCustomer =
+      [...foodCustomer, { name: food.getAttribute("data-name"), number:
+      food.value, price: food.getAttribute("data-price")*food.value } ] } })
+      orderCustomer = { ...orderCustomer, food: [ ...foodCustomer, ] }
+      orderlist.innerHTML = orderCustomer.food.map(item=>{ total = total +
+      item.price return ` <li class="order-item"> <span class="order-name">
+      ${item.name} </span> <span class="order-number"> ${item.number} </span>
+      <span class="order-name"> ${ item.price.toLocaleString('it-IT', {style :
+      'currency', currency : 'VND'}) } </span> </li> ` }) orderCustomer = {
+      ...orderCustomer, total: total } price_total.innerText =
+      total.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) })
+      $(document).ready(function() { $('.minus').click(function () { var $input
+      = $(this).parent().find('input'); var count = parseInt($input.val()) - 1;
+      count = count < 1 ? 0 : count; $input.val(count); $input.change(); return
+      false; }); $('.plus').click(function () { var $input =
+      $(this).parent().find('input'); $input.val(parseInt($input.val()) + 1);
+      $input.change(); return false; }); });
+      model_accept.addEventListener('click',()=>{ $.ajax({ type: 'POST', url:
+      '/manager/post', data: {...orderCustomer}, dataType: 'json', success:
+      function(data) { console.log('SUCCESS: '); }, error: function(data) {
+      console.log('ERROR: '); }, }); })
+    </script>
+  </body>
+</html>

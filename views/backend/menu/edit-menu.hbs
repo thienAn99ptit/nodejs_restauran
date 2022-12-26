@@ -1,0 +1,84 @@
+<form action="./update" method="post" enctype="multipart/form-data">
+
+  <!--Image-->
+  <div class="form-group">
+    <div class="col-sm-4">
+      <div class="mb-4 d-flex justify-content-center">
+        <img
+          src="/file/{{menuRes.img_food}}"
+          alt="example placeholder"
+          style="width: 240px;height: 240px;object-fit: cover;"
+          id="file-ip-1-preview"
+        />
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class="btn btn-primary btn-rounded">
+          <label class="form-label text-white m-1" for="file-ip-1">Choose file</label>
+          <input
+            name="image"
+            type="file"
+            id="file-ip-1"
+            accept="image/*"
+            onchange="showPreview(event);"
+            class="form-control d-none"
+          />
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="formGroupExampleInput">Tên món</label>
+        <input
+          type="text"
+          class="form-control"
+          id="formGroupExampleInput"
+          placeholder="Tên món"
+          name="name"
+          value="{{menuRes.name_food}}"
+        />
+        <input
+          type="text"
+          name="id"
+          value="{{menuRes._id}}"
+          style="width: 0px;height: 0px;"
+        />
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Giá</label>
+        <input
+          type="number"
+          class="form-control"
+          id="formGroupExampleInput2"
+          placeholder="Giá"
+          name="price"
+          value="{{menuRes.price_food}}"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Mô tả</label>
+    <textarea
+      class="form-control"
+      id="exampleFormControlTextarea1"
+      rows="3"
+      name="description"
+    >{{menuRes.description_food}}</textarea>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Submit form</button>
+</form>
+
+<script>
+  function showPreview(event){ if(event.target.files.length > 0){ var src =
+  URL.createObjectURL(event.target.files[0]); var preview =
+  document.getElementById("file-ip-1-preview"); preview.src = src; } }
+</script>

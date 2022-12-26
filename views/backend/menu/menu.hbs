@@ -1,0 +1,104 @@
+<div class="row justify-content-end mb-10">
+  <div class="col-2">
+    <a href="./menu/create" class="btn d-inline-flex btn-sm btn-primary mx-1">
+      <span class="pe-2">
+        <i class="bi bi-plus"></i>
+      </span>
+      <span>Tạo món</span>
+    </a>
+  </div>
+</div>
+<div class="row">
+  {{#each menu}}
+    <div class="col-sm-4 mb-6">
+      <div class="card" style="width: 18rem;">
+        <img
+          class="card-img-top"
+          style="height: 160px;object-fit: cover;"
+          src="/file/{{img_food}}"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{name_food}}</h5>
+          <p
+            class="card-text mb-2"
+            style="
+                        height: 3em;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2; 
+                                line-clamp: 2; 
+                        -webkit-box-orient: vertical;"
+          >
+            {{description_food}}
+          </p>
+          <p class="card-text mb-2" style="font-weight: 600;">Giá:
+            {{convertMoney price_food}}</p>
+          <a href="./menu/edit?id={{_id}}" class="btn btn-primary mr-2">Chỉnh
+            sửa</a>
+          {{!-- <a href="./menu/delete?id={{_id}}"  class="btn btn-danger mr-2" >Delete</a> --}}
+          <button
+            class="btn btn-danger mr-2"
+            data-toggle="modal"
+            data-id="{{_id}}"
+            data-name="{{name_food}}"
+            data-target="#exampleModalCenter"
+          >Xóa</button>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Xóa món ăn</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc xóa món này ???
+      </div>
+      <div class="modal-footer">
+        <a
+          href=""
+          type="button"
+          class="btn btn-danger confirm-delete"
+        >Delete</a>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{ const confirmDelete =
+  document.querySelector('.confirm-delete') const formDelete =
+  document.getElementById('form-delete') let idFood
+  $('#exampleModalCenter').on('show.bs.modal', function (event) { const button =
+  $(event.relatedTarget) idFood = button.data('id') confirmDelete.href =
+  `./menu/delete?id=${idFood}` document.querySelector('.modal-body').innerText =
+  `Bạn có chắc xóa món ${button.data('name')} ???` }) })
+</script>
